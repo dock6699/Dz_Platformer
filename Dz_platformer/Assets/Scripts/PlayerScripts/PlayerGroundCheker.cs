@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerGroundCheker : MonoBehaviour
 {
-    [SerializeField] CircleCollider2D _groundCheker;
+    [SerializeField] private CircleCollider2D _groundCheker;
     [SerializeField] private LayerMask _groundMask;
 
-    public bool IsOnGroundChek()
+    public bool CheckGroundCollision()
     {
         bool grounded = Physics2D.OverlapCircle(_groundCheker.transform.position, _groundCheker.radius, _groundMask);
         return grounded;

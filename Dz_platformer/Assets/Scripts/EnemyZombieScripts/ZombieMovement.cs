@@ -7,6 +7,7 @@ public class ZombieMovement : MonoBehaviour
     [SerializeField] private float _speed;
 
     private Vector3[] _zoneBorders;
+
     private bool _isInPatrolZOne;
     private int _currentPoint;
 

@@ -10,12 +10,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _jumpForce;
 
     private Rigidbody2D _rigidbody;
-    private float _scale;
+    private float _playerScale;
     private PlayerGroundCheker _groundCheker;
-    void Start()
+
+    private void Start()
     {
         _groundCheker = GetComponent<PlayerGroundCheker>();
-        _scale = transform.localScale.x;
+        _playerScale = transform.localScale.x;
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -29,11 +30,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (axisDirection > 0)
         {
-            transform.localScale = new Vector3(_scale * -1, transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(_playerScale * -1, transform.localScale.y, transform.localScale.z);
         }
         else if (axisDirection < 0)
         {
-            transform.localScale = new Vector3(_scale, transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(_playerScale, transform.localScale.y, transform.localScale.z);
         }
     }
 
@@ -48,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jumping()
     {
-        if (Input.GetKey(KeyCode.Space)&&_groundCheker.IsOnGroundChek())
+        if (Input.GetKey(KeyCode.Space)&&_groundCheker.CheckGroundCollision())
         {
             _rigidbody.AddForce(Vector2.up * _jumpForce);
         }
