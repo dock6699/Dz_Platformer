@@ -15,7 +15,7 @@ public class PlayerCoinsCollect : MonoBehaviour
     {
         if (collision.GetComponent<Coin>())
         {
-            _coinsCount += 1;
+            _coinsCount ++;
             Debug.Log(_coinsCount);
         }
     }

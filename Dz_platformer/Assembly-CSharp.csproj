@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\EnemyZombieScripts\ZombieMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAnimating.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerCoinsCollect.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerGroundCheker.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovement.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>E:/Git/Dz_Platformer/Dz_platformer/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

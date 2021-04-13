@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(PlayerGroundCheker))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] CircleCollider2D _groundCheker;
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
-    [SerializeField] private LayerMask _groundMask;
 
-    private BoxCollider2D _playerCollider;
-    private Rigidbody2D _playerRigidbody;
-
-    private float _playerScale;
+    private Rigidbody2D _rigidbody;
+    private float _scale;
+    private PlayerGroundCheker _groundCheker;
     void Start()
     {
-        _playerScale = transform.localScale.x;
-        _playerCollider = gameObject.GetComponent<BoxCollider2D>();
-        _playerRigidbody = gameObject.GetComponent<Rigidbody2D>();
+        _groundCheker = GetComponent<PlayerGroundCheker>();
+        _scale = transform.localScale.x;
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -31,12 +29,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (axisDirection > 0)
         {
-            transform.localScale = new Vector3(_playerScale * -1, transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(_scale * -1, transform.localScale.y, transform.localScale.z);
         }
         else if (axisDirection < 0)
         {
-            transform.localScale = new Vector3(_playerScale, transform.localScale.y, transform.localScale.z);
-
+            transform.localScale = new Vector3(_scale, transform.localScale.y, transform.localScale.z);
         }
     }
 
@@ -45,23 +42,16 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
         {
             transform.Translate(_speed * Time.deltaTime * Input.GetAxis("Horizontal"), 0, 0);
-
             Mirroring(Input.GetAxis("Horizontal"));
         }
     }
 
     private void Jumping()
     {
-        if (Input.GetKey(KeyCode.Space)&&IsOnGround())
+        if (Input.GetKey(KeyCode.Space)&&_groundCheker.IsOnGroundChek())
         {
-            _playerRigidbody.AddForce(Vector2.up * _jumpForce);
+            _rigidbody.AddForce(Vector2.up * _jumpForce);
         }
     }
 
-    private bool IsOnGround()
-    {
-        bool grounded = Physics2D.OverlapCircle(_groundCheker.transform.position, _groundCheker.radius, _groundMask);
-
-        return grounded;
-    }
 }

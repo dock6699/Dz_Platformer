@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class PlayerAnimating : MonoBehaviour
 {
-    private Animator _playerAnimator;
+    private Animator _animator;
 
-    void Start()
+    private void Start()
     {
-        _playerAnimator = gameObject.GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
 
 
-    void Update()
+    private void Update()
     {
-            _playerAnimator.SetFloat("Speed",Mathf.Abs(Input.GetAxis("Horizontal")));
+            _animator.SetFloat("Speed",Mathf.Abs(Input.GetAxis("Horizontal")));
     }
 }
